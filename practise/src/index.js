@@ -11,10 +11,10 @@ class App extends Component {
     ],
     message: ''
   };
-  ChangeName = newName => {
+  ChangeName = () => {
     this.setState({
       persons: [
-        { name: newName, age: '20' },
+        { name: 'changed', age: '20' },
         { name: 'jay', age: '20' },
         { name: 'jay', age: '20' }
       ]
