@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Person from './Person/Person';
+import './Person/Person.css';
 
 class App extends Component {
   state = {
@@ -9,7 +10,8 @@ class App extends Component {
       { name: 'Rupesh', age: '40' },
       { name: 'Rupesh', age: '30' }
     ],
-    message: ''
+    message: '',
+    hidePersons: false
   };
   ChangeName = () => {
     this.setState({
@@ -27,25 +29,51 @@ class App extends Component {
     });
   };
 
+  togglePersons = hide => {
+    this.setState({
+      hidePersons: hide ? false : true
+    });
+  };
+
   render() {
+    const style = {
+      backgroundColor: 'button',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      textAlign: 'center'
+    };
     return (
-      <div>
-        <button onClick={() => this.ChangeName('Ruesh')}>Change name</button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-        />
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.ChangeName}
-        />
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}
-        >
-          coding
-        </Person>
+      <div align="center">
+        <button style={style} onClick={() => this.ChangeName('Ruesh')}>
+          Change name
+        </button>
+        <br /> <br />
+        <button onClick={this.togglePersons.bind(this, true)} style={style}>
+          Hide persons
+        </button>
+        <button onClick={this.togglePersons.bind(this, false)} style={style}>
+          Show persons
+        </button>
+        {this.state.hidePersons ? (
+          <div>
+            <Person
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age}
+            />
+            <Person
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}
+              click={this.ChangeName}
+            />
+            <Person
+              name={this.state.persons[2].name}
+              age={this.state.persons[2].age}
+            >
+              coding
+            </Person>
+          </div>
+        ) : null}
         <h1> React </h1>
         <h1> {this.state.message}</h1>
         <input
